@@ -1,5 +1,5 @@
 ---
-title: Resumo do Livro: SISTEMAS OPERACIONAIS MODERNOS
+title: RESUMO SISTEMAS OPERACIONAIS MODERNOS
 description: Resumos organizados por capítulos
 theme: jekyll-theme-cayman
 ---
