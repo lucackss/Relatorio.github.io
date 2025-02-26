@@ -1,7 +1,6 @@
 ---
 title: RESUMO SISTEMAS OPERACIONAIS MODERNOS
 description: Resumos organizados por capítulos
-theme: jekyll-theme-cayman
 ---
 
 # 📖 Resumo do Livro
