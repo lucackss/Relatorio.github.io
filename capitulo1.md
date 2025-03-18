@@ -1,85 +1,54 @@
-
 Capítulo 1 – Introdução aos Sistemas Operacionais
 
 1.1 O que é um Sistema Operacional?
-Um sistema operacional (SO) é um software fundamental que atua como intermediário entre o hardware do computador e os programas de usuário. Ele pode ser visto de duas formas:
--Gerenciador de recursos: Administra os componentes do sistema, como CPU, memória e dispositivos de entrada/saída (E/S), garantindo o uso eficiente desses recursos.
--Máquina estendida: Fornece uma interface abstrata para facilitar a interação do usuário com o hardware, escondendo sua complexidade. Essa abstração inclui conceitos como processos, arquivos e memória virtual.
+Um sistema operacional (SO) é um software essencial que atua como intermediário entre o hardware do computador e os programas de usuário. Ele pode ser compreendido sob duas perspectivas principais. Primeiramente, como um gerenciador de recursos, cuja função é administrar os componentes do sistema, como a CPU, a memória e os dispositivos de entrada e saída, garantindo o uso eficiente desses recursos. Em segundo lugar, pode ser visto como uma máquina estendida, pois fornece uma interface que simplifica a interação do usuário com o hardware, abstraindo sua complexidade. Essa abstração inclui elementos como processos, arquivos e memória virtual.
 
 1.2 História dos Sistemas Operacionais
+A evolução dos sistemas operacionais acompanha o desenvolvimento da computação e pode ser dividida em quatro gerações distintas:
 
-A evolução dos sistemas operacionais pode ser dividida em quatro gerações:
--1.2.1 Primeira Geração (1945-1955) – Computadores Sem SO
-Os primeiros computadores eram operados manualmente sem nenhum software intermediário.
-A programação era feita diretamente em linguagem de máquina ou utilizando cartões perfurados.
--1.2.2 Segunda Geração (1955-1965) – Sistemas em Lote
-Surgiram os primeiros sistemas operacionais rudimentares para substituir operadores humanos na execução de tarefas repetitivas.
-Os sistemas em lote (batch systems) permitiam que múltiplos jobs fossem organizados em sequência, sendo processados sem interação do usuário.
-Um monitor residente permanecia na memória para carregar e executar os programas automaticamente.
--1.2.3 Terceira Geração (1965-1980) – Multiprogramação
-O desenvolvimento dos mainframes e a necessidade de melhor utilização dos recursos levaram à multiprogramação, permitindo a execução simultânea de múltiplos programas na memória.
-Surgiram os primeiros sistemas time-sharing, possibilitando que múltiplos usuários interagissem simultaneamente com o computador por meio de terminais remotos.
-Exemplos de sistemas dessa geração: IBM OS/360 e MULTICS.
--1.2.4 Quarta Geração (1980-presente) – Computadores Pessoais
-A popularização dos microcomputadores trouxe sistemas operacionais voltados para usuários individuais, como MS-DOS, MacOS e Windows.
-Posteriormente, sistemas operacionais ganharam suporte para interfaces gráficas (GUIs), redes e multitarefa preemptiva.
-Surgiram os sistemas operacionais modernos como Windows, Linux, MacOS e Android.
+Primeira Geração (1945-1955) – Computadores sem SO: Nos primórdios da computação, os computadores não possuíam sistemas operacionais e eram programados diretamente em linguagem de máquina, utilizando cartões perfurados para entrada de dados. A execução de cada tarefa demandava intervenção manual, tornando o processo lento e ineficiente.
+
+Segunda Geração (1955-1965) – Sistemas em Lote: Com o aumento da demanda por automação, surgiram os primeiros sistemas operacionais rudimentares, que substituíram operadores humanos na execução de tarefas repetitivas. Os sistemas em lote (batch systems) permitiam a execução sequencial de múltiplos programas (jobs), sem a necessidade de intervenção contínua do usuário. Além disso, um monitor residente permanecia na memória, sendo responsável por carregar e executar os programas automaticamente.
+
+Terceira Geração (1965-1980) – Multiprogramação: O desenvolvimento dos mainframes e a necessidade de otimizar o uso dos recursos levaram à adoção da multiprogramação, técnica que permite a execução simultânea de múltiplos programas na memória. Foi nesse período que surgiram os primeiros sistemas time-sharing, possibilitando a interação simultânea de múltiplos usuários por meio de terminais remotos. Exemplos notáveis dessa geração incluem o IBM OS/360 e o MULTICS.
+
+Quarta Geração (1980-presente) – Computadores Pessoais: A popularização dos microcomputadores levou ao desenvolvimento de sistemas operacionais voltados para usuários individuais, como o MS-DOS, MacOS e Windows. Com o passar do tempo, esses sistemas evoluíram para oferecer interfaces gráficas intuitivas, suporte a redes e capacidade de multitarefa preemptiva. Atualmente, sistemas como Windows, Linux, MacOS e Android são amplamente utilizados em diferentes plataformas.
 
 1.3 Estrutura do Hardware e sua Relação com o SO
+Os sistemas operacionais dependem diretamente da estrutura do hardware para gerenciar seus recursos de forma eficiente. Os principais componentes de um computador incluem:
 
-Os sistemas operacionais dependem diretamente do hardware, que é composto por:
--Processador (CPU): Executa instruções de programas e gerencia operações do sistema.
--Memória principal (RAM): Armazena dados temporários e programas em execução.
--Dispositivos de entrada/saída (E/S): Componentes como discos rígidos, teclados e monitores.
--Barramentos: Canais de comunicação que conectam os dispositivos ao processador.
-O SO gerencia esses componentes garantindo que os programas acessem os recursos corretamente e evitando conflitos entre processos.
+Processador (CPU): Responsável pela execução das instruções dos programas e pelo gerenciamento das operações do sistema.
+Memória principal (RAM): Armazena temporariamente dados e programas em execução, garantindo acesso rápido às informações necessárias.
+Dispositivos de entrada/saída (E/S): Englobam componentes como discos rígidos, teclados, monitores e impressoras, permitindo a comunicação entre o usuário e o sistema.
+Barramentos: Estruturas que interligam os diversos componentes do computador, possibilitando a troca de dados entre eles.
+O sistema operacional gerencia esses elementos para garantir que os programas possam acessar os recursos do sistema de maneira eficiente e sem conflitos.
 
 1.4 Conceitos Fundamentais dos Sistemas Operacionais
+Os sistemas operacionais modernos se baseiam em cinco pilares fundamentais, que garantem seu funcionamento eficiente e seguro:
 
-Os sistemas operacionais modernos são construídos sobre cinco conceitos essenciais:
--1.4.1 Processos
-Um processo é um programa em execução, contendo código, dados e estado de execução.
-O SO gerencia processos, permitindo sua criação, finalização e troca de contexto para multitarefa.
-Suporte a threads, que são subdivisões de um processo para execução concorrente.
--1.4.2 Gerenciamento de Memória
-Controla a alocação de memória para processos.
-Utiliza memória virtual para expandir a memória física utilizando espaço em disco.
--1.4.3 Entrada/Saída (E/S)
-Gerencia dispositivos de hardware como discos, impressoras e teclados.
-Utiliza drivers para padronizar a comunicação entre hardware e software.
--1.4.4 Sistemas de Arquivos
-Estrutura e organiza os dados em dispositivos de armazenamento.
-Possui mecanismos de permissão para controle de acesso.
--1.4.5 Segurança e Proteção
-Implementa mecanismos para impedir acessos não autorizados.
-Utiliza criptografia, autenticação e controle de permissões.
+Gerenciamento de Processos: Um processo corresponde a um programa em execução, contendo seu código, dados e estado de processamento. O sistema operacional gerencia sua criação, finalização e troca de contexto, permitindo a multitarefa e a execução concorrente. Além disso, há suporte para threads, que são subdivisões de um processo que podem ser executadas paralelamente.
+
+Gerenciamento de Memória: Controla a alocação e o uso da memória pelos processos. Para otimizar o uso da RAM, muitos sistemas operacionais utilizam memória virtual, técnica que expande a capacidade da memória física ao utilizar o espaço em disco como extensão temporária.
+
+Entrada/Saída (E/S): Administra a comunicação entre o processador e os dispositivos de hardware, garantindo que operações como leitura e gravação de arquivos ocorram corretamente. O sistema utiliza drivers para padronizar a comunicação entre software e hardware.
+
+Sistemas de Arquivos: Estruturam e organizam os dados armazenados nos dispositivos de memória, fornecendo um sistema hierárquico para o gerenciamento de arquivos e diretórios. Além disso, possuem mecanismos para controle de permissões e segurança.
+
+Segurança e Proteção: Implementam mecanismos para impedir acessos não autorizados e garantir a integridade do sistema. Métodos como criptografia, autenticação e controle de permissões são empregados para proteger os dados e os processos em execução.
 
 1.5 Chamadas de Sistema (System Calls)
+As chamadas de sistema representam a interface entre os programas de usuário e o sistema operacional. Elas permitem que os programas realizem operações essenciais, como criação de processos, manipulação de arquivos e gerenciamento de diretórios. No UNIX, as chamadas de sistema são categorizadas da seguinte forma:
 
-As chamadas de sistema são a interface entre os programas de usuário e o SO. Elas permitem que os programas executem funções essenciais do sistema operacional. No UNIX, elas são classificadas em quatro categorias:
--Gerenciamento de processos: Criar, terminar e sincronizar processos.
--Manipulação de arquivos: Criar, abrir, ler, escrever e deletar arquivos.
--Gerenciamento de diretórios: Criar e remover diretórios, listar arquivos, modificar permissões.
--Chamadas diversas: Alocar memória, configurar permissões e interagir com dispositivos.
-
+Gerenciamento de processos: Criar, finalizar e sincronizar processos.
+Manipulação de arquivos: Criar, abrir, ler, escrever e excluir arquivos.
+Gerenciamento de diretórios: Criar e remover diretórios, listar arquivos e modificar permissões.
+Outras chamadas: Alocar memória, interagir com dispositivos e configurar permissões de acesso.
 1.6 Estruturas dos Sistemas Operacionais
+Os sistemas operacionais podem ser organizados de diferentes maneiras, dependendo do grau de modularidade e da complexidade desejada. As principais abordagens são:
 
-Os sistemas operacionais podem ser organizados de diferentes formas para facilitar seu desenvolvimento e manutenção:
--1.6.1 Sistemas Monolíticos
-O SO é escrito como um grande bloco de código, onde todos os serviços operam juntos.
-Exemplo: Linux.
--1.6.2 Estrutura em Camadas
-O SO é dividido em módulos organizados em camadas, onde cada camada interage apenas com a inferior.
-Exemplo: THE (Technical University of Eindhoven).
--1.6.3 Micronúcleo (Microkernel)
-Apenas funções essenciais (como comunicação entre processos) estão no núcleo. O restante opera no espaço do usuário.
-Exemplo: Minix, QNX.
--1.6.4 Arquitetura Cliente-Servidor
-O SO é dividido em pequenos servidores independentes que se comunicam por mensagens.
-Exemplo: Windows NT, GNU Hurd.
--1.6.5 Máquinas Virtuais
-O hardware é virtualizado para rodar múltiplos sistemas operacionais simultaneamente.
-Exemplo: VMware, VirtualBox.
--1.6.6 Exonúcleo (Exokernel)
-O SO oferece apenas funções mínimas, permitindo que aplicativos tenham controle direto do hardware.
-Exemplo: ExOS.
+Sistemas Monolíticos: Todo o sistema operacional é escrito como um único bloco de código, no qual todos os serviços operam juntos. Exemplo: Linux.
+Arquitetura em Camadas: O SO é dividido em módulos organizados hierarquicamente, onde cada camada interage apenas com a camada inferior. Exemplo: THE (Technical University of Eindhoven).
+Micronúcleo (Microkernel): Apenas as funções essenciais, como comunicação entre processos, permanecem no núcleo do SO, enquanto outros serviços operam no espaço do usuário. Exemplo: Minix, QNX.
+Arquitetura Cliente-Servidor: O sistema operacional é fragmentado em pequenos servidores independentes, que se comunicam por meio de troca de mensagens. Exemplo: Windows NT, GNU Hurd.
+Máquinas Virtuais: O hardware é virtualizado para permitir a execução de múltiplos sistemas operacionais simultaneamente. Exemplo: VMware, VirtualBox.
+Exonúcleo (Exokernel): O sistema operacional fornece apenas um conjunto mínimo de funções, permitindo que os aplicativos tenham maior controle sobre o hardware. Exemplo: ExOS.
