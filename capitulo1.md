@@ -1,9 +1,9 @@
-Capítulo 1 – Introdução aos Sistemas Operacionais
+Capítulo 1 – Introdução.
 
-1.1 O que é um Sistema Operacional?
+O que é um Sistema Operacional?
 Um sistema operacional (SO) é um software essencial que atua como intermediário entre o hardware do computador e os programas de usuário. Ele pode ser compreendido sob duas perspectivas principais. Primeiramente, como um gerenciador de recursos, cuja função é administrar os componentes do sistema, como a CPU, a memória e os dispositivos de entrada e saída, garantindo o uso eficiente desses recursos. Em segundo lugar, pode ser visto como uma máquina estendida, pois fornece uma interface que simplifica a interação do usuário com o hardware, abstraindo sua complexidade. Essa abstração inclui elementos como processos, arquivos e memória virtual.
 
-1.2 História dos Sistemas Operacionais
+História dos Sistemas Operacionais
 A evolução dos sistemas operacionais acompanha o desenvolvimento da computação e pode ser dividida em quatro gerações distintas:
 
 Primeira Geração (1945-1955) – Computadores sem SO: Nos primórdios da computação, os computadores não possuíam sistemas operacionais e eram programados diretamente em linguagem de máquina, utilizando cartões perfurados para entrada de dados. A execução de cada tarefa demandava intervenção manual, tornando o processo lento e ineficiente.
@@ -14,7 +14,7 @@ Terceira Geração (1965-1980) – Multiprogramação: O desenvolvimento dos mai
 
 Quarta Geração (1980-presente) – Computadores Pessoais: A popularização dos microcomputadores levou ao desenvolvimento de sistemas operacionais voltados para usuários individuais, como o MS-DOS, MacOS e Windows. Com o passar do tempo, esses sistemas evoluíram para oferecer interfaces gráficas intuitivas, suporte a redes e capacidade de multitarefa preemptiva. Atualmente, sistemas como Windows, Linux, MacOS e Android são amplamente utilizados em diferentes plataformas.
 
-1.3 Estrutura do Hardware e sua Relação com o SO
+Estrutura do Hardware e sua Relação com o SO
 Os sistemas operacionais dependem diretamente da estrutura do hardware para gerenciar seus recursos de forma eficiente. Os principais componentes de um computador incluem:
 
 Processador (CPU): Responsável pela execução das instruções dos programas e pelo gerenciamento das operações do sistema.
@@ -23,7 +23,7 @@ Dispositivos de entrada/saída (E/S): Englobam componentes como discos rígidos,
 Barramentos: Estruturas que interligam os diversos componentes do computador, possibilitando a troca de dados entre eles.
 O sistema operacional gerencia esses elementos para garantir que os programas possam acessar os recursos do sistema de maneira eficiente e sem conflitos.
 
-1.4 Conceitos Fundamentais dos Sistemas Operacionais
+Conceitos Fundamentais dos Sistemas Operacionais
 Os sistemas operacionais modernos se baseiam em cinco pilares fundamentais, que garantem seu funcionamento eficiente e seguro:
 
 Gerenciamento de Processos: Um processo corresponde a um programa em execução, contendo seu código, dados e estado de processamento. O sistema operacional gerencia sua criação, finalização e troca de contexto, permitindo a multitarefa e a execução concorrente. Além disso, há suporte para threads, que são subdivisões de um processo que podem ser executadas paralelamente.
@@ -36,14 +36,15 @@ Sistemas de Arquivos: Estruturam e organizam os dados armazenados nos dispositiv
 
 Segurança e Proteção: Implementam mecanismos para impedir acessos não autorizados e garantir a integridade do sistema. Métodos como criptografia, autenticação e controle de permissões são empregados para proteger os dados e os processos em execução.
 
-1.5 Chamadas de Sistema (System Calls)
+Chamadas de Sistema (System Calls)
 As chamadas de sistema representam a interface entre os programas de usuário e o sistema operacional. Elas permitem que os programas realizem operações essenciais, como criação de processos, manipulação de arquivos e gerenciamento de diretórios. No UNIX, as chamadas de sistema são categorizadas da seguinte forma:
 
 Gerenciamento de processos: Criar, finalizar e sincronizar processos.
 Manipulação de arquivos: Criar, abrir, ler, escrever e excluir arquivos.
 Gerenciamento de diretórios: Criar e remover diretórios, listar arquivos e modificar permissões.
 Outras chamadas: Alocar memória, interagir com dispositivos e configurar permissões de acesso.
-1.6 Estruturas dos Sistemas Operacionais
+
+Estruturas dos Sistemas Operacionais
 Os sistemas operacionais podem ser organizados de diferentes maneiras, dependendo do grau de modularidade e da complexidade desejada. As principais abordagens são:
 
 Sistemas Monolíticos: Todo o sistema operacional é escrito como um único bloco de código, no qual todos os serviços operam juntos. Exemplo: Linux.
