@@ -1,9 +1,81 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum ipsum sed sem eleifend, pellentesque pellentesque felis hendrerit. Phasellus pharetra convallis rhoncus. Proin ut malesuada purus. Curabitur vel ligula placerat, euismod quam vitae, lacinia mauris. Suspendisse fringilla nunc nibh, vel consequat arcu porttitor eu. Nulla dapibus tellus ac leo faucibus, ut hendrerit est tincidunt. Vestibulum vitae sollicitudin elit, aliquam hendrerit leo. Duis nec accumsan eros, in varius dolor. Etiam interdum dapibus luctus.
+ O que são processos?
+Um processo é um programa em execução. Diferente de um programa parado no disco, um processo tem:
 
-Praesent sed tortor non dolor facilisis ullamcorper eu sed lorem. Donec placerat sit amet est id bibendum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In a neque venenatis lectus tempus commodo non sit amet leo. Ut a orci et mauris mattis ultrices et eget sem. Quisque quis blandit quam. Morbi enim ex, rutrum a feugiat nec, fringilla a leo. Phasellus ut lobortis sem. Morbi tempor ligula et lobortis suscipit. Duis venenatis iaculis vulputate. Vestibulum pretium lorem quam, non eleifend magna rhoncus vitae. Curabitur ut urna mollis, auctor justo non, dictum turpis. Vestibulum sit amet neque et tortor molestie aliquam.
+Seu estado de execução (ativo, esperando ou bloqueado),
 
-Donec rutrum lacinia egestas. Nam orci dolor, sagittis commodo laoreet at, euismod quis mauris. Morbi pellentesque enim eu velit gravida, sit amet sollicitudin dolor elementum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam pellentesque molestie auctor. Fusce imperdiet consequat diam, in sodales lectus aliquam at. Mauris aliquet orci vel pharetra luctus.
+Espaço de endereçamento próprio (sua própria memória),
 
-Mauris sodales quam id tempor ullamcorper. Nam accumsan, dolor sit amet viverra dapibus, augue mi sollicitudin ex, et tincidunt odio ante in sapien. Donec mi mi, maximus ullamcorper leo blandit, varius fringilla urna. Curabitur rhoncus porta nibh, at aliquet orci iaculis at. Maecenas laoreet erat rutrum, dignissim lorem sed, efficitur est. In condimentum augue ut nisl varius sodales. Integer porttitor diam tortor, non convallis sem rhoncus quis. In non magna diam.
+Recursos associados (arquivos abertos, variáveis, etc.).
 
-Proin pretium vel ligula eget tincidunt. Quisque quis fringilla neque. Curabitur dui urna, vestibulum non imperdiet at, malesuada vel tortor. Etiam porta velit sed mauris bibendum, ut consequat quam ornare. Aliquam vel tincidunt lacus, quis finibus nisl. Maecenas id dolor egestas, auctor velit ut, aliquet purus. Mauris ornare nibh eget eros finibus laoreet. Donec elementum sapien vel elit vehicula, non auctor augue tristique. Phasellus imperdiet convallis tortor, dictum dignissim dolor venenatis 
+Processos podem ser criados e encerrados dinamicamente, e muitos rodam ao mesmo tempo (concorrência), mesmo que pareça que o computador está executando um de cada vez. O sistema operacional simula essa execução simultânea (usando escalonamento).
+
+🔹 Estados de um processo
+Durante sua vida, um processo pode estar em três estados:
+
+Executando: está na CPU naquele momento.
+
+Pronto (executável): está esperando sua vez de executar.
+
+Bloqueado: está esperando por algum recurso (ex: resposta do disco).
+
+O sistema operacional faz a transição entre esses estados dependendo de eventos e da lógica de controle de processos.
+
+🔹 Threads – Múltiplos fluxos de execução
+Para tornar os processos mais eficientes e rápidos, surgiram as threads (ou “linhas de execução”):
+
+São subprocessos, que compartilham o mesmo espaço de memória do processo principal.
+
+Cada thread tem sua própria pilha, registradores e contador de programa.
+
+Permitem que várias tarefas sejam feitas ao mesmo tempo dentro de um mesmo processo (ex: um navegador carregando uma página enquanto permite rolar a tela).
+
+Threads são úteis, por exemplo, em programas com tarefas paralelas (como servidores web).
+
+🔹 Tipos de Threads
+Threads no espaço do usuário: gerenciadas pela aplicação, sem envolvimento direto do núcleo.
+
+Threads no núcleo: gerenciadas diretamente pelo sistema operacional, com mais controle e interação com o hardware.
+
+Ambas têm vantagens e desvantagens. Threads no núcleo são mais poderosas, mas também mais “caras” (mais lentas para criar/trocar). Threads no espaço do usuário são mais leves, mas o sistema operacional não as reconhece individualmente.
+
+🔹 Comunicação e Sincronização entre Processos (e Threads)
+Muitas vezes, processos ou threads precisam trabalhar juntos. Para isso, usam primitivas de comunicação:
+
+Semáforos: variáveis especiais que controlam o acesso a recursos compartilhados.
+
+Monitores: estruturas de dados com mecanismos de controle embutidos.
+
+Mensagens: troca direta de informações entre processos.
+
+Essas ferramentas evitam condições de corrida (quando dois processos tentam usar o mesmo recurso ao mesmo tempo) e permitem sincronização, garantindo que tudo funcione de forma coordenada.
+
+🔹 Problemas clássicos de concorrência
+O capítulo também discute exemplos clássicos de problemas de sincronização:
+
+Produtor-consumidor: um produz dados enquanto outro consome; precisam se coordenar.
+
+Jantar dos filósofos: cinco filósofos dividem talheres e devem evitar deadlocks (travamentos).
+
+Leitor-escritor: leitores podem acessar dados simultaneamente, mas escritores precisam exclusividade.
+
+Esses problemas mostram a importância de controlar bem a concorrência para evitar travamentos ou comportamentos errados.
+
+🔹 Escalonamento de processos
+Escalonamento é o processo de decidir qual processo/thread será executado a seguir. Há vários algoritmos para isso:
+
+🧮 Algoritmos comuns:
+FCFS (First Come, First Served): executa na ordem de chegada.
+
+Shortest Job First: executa o menor processo primeiro.
+
+Round-Robin: dá um “quantum” de tempo para cada processo, em ciclos.
+
+Por prioridade: processos com maior prioridade rodam antes.
+
+Múltiplas filas: processos são organizados por tipo ou prioridade.
+
+Escalonamento por loteria: cada processo recebe “bilhetes” e sorteios decidem quem executa.
+
+Proporcional Justo (fair-share): dá a cada processo uma fatia justa do tempo da CPU.
+
+Alguns sistemas modernos separam o mecanismo de escalonamento (como funciona) da política de escalonamento (quem escolhe o que executar), permitindo mais flexibilidade e personalização.
