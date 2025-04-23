@@ -1,9 +1,104 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum ipsum sed sem eleifend, pellentesque pellentesque felis hendrerit. Phasellus pharetra convallis rhoncus. Proin ut malesuada purus. Curabitur vel ligula placerat, euismod quam vitae, lacinia mauris. Suspendisse fringilla nunc nibh, vel consequat arcu porttitor eu. Nulla dapibus tellus ac leo faucibus, ut hendrerit est tincidunt. Vestibulum vitae sollicitudin elit, aliquam hendrerit leo. Duis nec accumsan eros, in varius dolor. Etiam interdum dapibus luctus.
+**Capítulo 4 – Sistemas de Arquivos**
 
-Praesent sed tortor non dolor facilisis ullamcorper eu sed lorem. Donec placerat sit amet est id bibendum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In a neque venenatis lectus tempus commodo non sit amet leo. Ut a orci et mauris mattis ultrices et eget sem. Quisque quis blandit quam. Morbi enim ex, rutrum a feugiat nec, fringilla a leo. Phasellus ut lobortis sem. Morbi tempor ligula et lobortis suscipit. Duis venenatis iaculis vulputate. Vestibulum pretium lorem quam, non eleifend magna rhoncus vitae. Curabitur ut urna mollis, auctor justo non, dictum turpis. Vestibulum sit amet neque et tortor molestie aliquam.
+**Sistemas de Arquivos**
+Um sistema de arquivos é a parte do sistema operacional responsável por gerenciar como os dados são armazenados e acessados em dispositivos de armazenamento, como discos rígidos e SSDs. Ele oferece uma abstração de alto nível para que os usuários interajam com arquivos e diretórios, enquanto internamente lida com detalhes como alocação de blocos, acesso e confiabilidade.
 
-Donec rutrum lacinia egestas. Nam orci dolor, sagittis commodo laoreet at, euismod quis mauris. Morbi pellentesque enim eu velit gravida, sit amet sollicitudin dolor elementum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam pellentesque molestie auctor. Fusce imperdiet consequat diam, in sodales lectus aliquam at. Mauris aliquet orci vel pharetra luctus.
+**Estrutura Externa (para o usuário)**
+Do ponto de vista do usuário, um sistema de arquivos:
 
-Mauris sodales quam id tempor ullamcorper. Nam accumsan, dolor sit amet viverra dapibus, augue mi sollicitudin ex, et tincidunt odio ante in sapien. Donec mi mi, maximus ullamcorper leo blandit, varius fringilla urna. Curabitur rhoncus porta nibh, at aliquet orci iaculis at. Maecenas laoreet erat rutrum, dignissim lorem sed, efficitur est. In condimentum augue ut nisl varius sodales. Integer porttitor diam tortor, non convallis sem rhoncus quis. In non magna diam.
+É uma coleção de arquivos e diretórios;
 
-Proin pretium vel ligula eget tincidunt. Quisque quis fringilla neque. Curabitur dui urna, vestibulum non imperdiet at, malesuada vel tortor. Etiam porta velit sed mauris bibendum, ut consequat quam ornare. Aliquam vel tincidunt lacus, quis finibus nisl. Maecenas id dolor egestas, auctor velit ut, aliquet purus. Mauris ornare nibh eget eros finibus laoreet. Donec elementum sapien vel elit vehicula, non auctor augue tristique. Phasellus imperdiet convallis tortor, dictum dignissim dolor venenatis non.
+- Permite operações como:
+- Leitura e escrita em arquivos;
+- Criação e remoção de diretórios;
+- Movimentação de arquivos entre diretórios.
+
+Sistemas modernos geralmente utilizam estruturas hierárquicas de diretórios, permitindo a criação de subdiretórios recursivamente, formando uma árvore.
+
+**Estrutura Interna (para o sistema operacional)**
+Internamente, o sistema precisa lidar com:
+
+- Alocação de armazenamento;
+- Mapeamento de arquivos para blocos de disco;
+- Gerenciamento de espaço livre;
+- Atributos dos arquivos (como permissões, timestamps, tamanho, etc.).
+
+**Métodos de alocação:**
+Alocação contígua: arquivos são armazenados em blocos consecutivos no disco;
+- Rápida leitura sequencial;
+- Pode causar fragmentação externa.
+
+Alocação encadeada: cada bloco aponta para o próximo (como uma lista encadeada);
+- Boa para arquivos sequenciais;
+- Ruim para acesso aleatório.
+
+Alocação indexada (i-node): uma estrutura contém os endereços dos blocos do arquivo;
+- Excelente para acesso aleatório;
+- Amplamente usada em sistemas UNIX.
+
+**Atributos e Metadados**
+Arquivos possuem atributos como:
+
+- Nome, tipo, tamanho;
+- Data de criação/modificação/acesso;
+- Permissões (leitura, escrita, execução);
+- Proprietário e grupo.
+
+Esses atributos podem ser armazenados:
+- Diretamente nos diretórios;
+- Em estruturas separadas, como os i-nodes no UNIX.
+
+**Gerenciamento de Espaço Livre**
+Formas comuns de gerenciar o espaço disponível no disco:
+
+- Lista de blocos livres: mantém uma lista dos blocos desocupados.
+- Mapa de bits (bitmap): usa um bit por bloco para indicar se está livre (0) ou ocupado (1).
+
+Mapas de bits são mais eficientes para verificar rapidamente grandes áreas de disco, mas podem consumir mais memória.
+
+**Confiabilidade do Sistema de Arquivos**
+Falhas de energia, bugs ou corrupção física podem danificar um sistema de arquivos. Para mitigar isso, são utilizados:
+
+- Backups incrementais;
+- Programas de verificação e reparo (como fsck no UNIX);
+- Sistemas de arquivos com journaling (diário): como o ext4, NTFS, JFS;
+- Registram operações pendentes em um log antes de aplicá-las no disco, evitando inconsistências.
+
+**Otimizações de Desempenho**
+Cache de blocos: armazena em memória blocos recentemente acessados;
+
+- Leitura antecipada (read-ahead): carrega blocos que provavelmente serão acessados em breve;
+- Colocação próxima de arquivos: armazena arquivos relacionados fisicamente próximos para reduzir o tempo de busca;
+- Gravações agrupadas (batch writes) para reduzir operações de disco.
+
+**Exemplos de Sistemas de Arquivos**
+- ISO 9660: usado em CDs;
+- FAT (MS-DOS): simples, mas com limitações em tamanho;
+- EXT (UNIX/Linux): baseado em i-nodes, altamente confiável;
+- NTFS (Windows): suporte a journaling, compressão, criptografia.
+
+**Estruturas de Diretórios**
+Sistemas de arquivos suportam diferentes estruturas de diretórios:
+
+- Plano único (todos os arquivos em um único diretório);
+- Hierárquico (árvore de diretórios com caminhos absolutos e relativos);
+- Grafos acíclicos (suporte a links rígidos);
+- Grafos gerais (links simbólicos).
+
+**Links Rígidos vs. Simbólicos**
+Links rígidos (hard links):
+- Várias entradas de diretório apontam para o mesmo i-node;
+- Compartilham efetivamente o mesmo conteúdo.
+
+Links simbólicos (symlinks):
+- São arquivos que contêm o nome de outro arquivo;
+- Mais flexíveis, mas quebram se o destino for removido.
+
+**Fragmentação e Compactação**
+- A alocação contígua pode causar fragmentação interna (espaço desperdiçado dentro do bloco) e externa (espaço não contíguo no disco).
+- Compactação do disco pode ser usada para reorganizar os arquivos e eliminar fragmentações, mas é um processo custoso em termos de tempo.
+
+**Observações Técnicas**
+- Um i-node com 10 ponteiros diretos e blocos de 1024 KB pode armazenar diretamente até 10 MB.
+- Em sistemas que suportam mapeamento de arquivos para a memória, esse mapeamento deve ser feito com restrições de alinhamento e permissões de acesso.
+- A escolha entre alocação contígua, encadeada ou indexada depende de padrões de uso dos arquivos.
