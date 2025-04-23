@@ -1,78 +1,132 @@
-Capítulo 3 – Gerenciamento de Memória (Resumo Detalhado)
-- Introdução ao Gerenciamento de Memória
-O gerenciamento de memória é essencial para permitir que múltiplos processos coexistam e executem de forma eficiente. Em sistemas simples, o gerenciamento é estático: um processo é carregado e permanece na memória até sua finalização. Esses sistemas não realizam troca (swapping) nem paginação e são comuns em sistemas embarcados ou de tempo real.
+Capítulo 3 – Gerenciamento de Memória (Resumo Expandido)
+🔸 1. Visão Geral do Gerenciamento de Memória
+A principal função do gerenciamento de memória é permitir que vários processos coexistam, maximizando o uso da RAM e oferecendo proteção, isolamento e flexibilidade. Os sistemas operacionais modernos precisam lidar com a limitação da memória física e o crescente número de processos e programas exigentes.
 
-- Troca de Processos (Swapping)
-Com a evolução para sistemas multiprogramáveis, tornou-se necessário permitir que mais processos residissem no sistema do que a memória física disponível. Isso é feito por meio da troca, onde processos são movidos da memória para o disco e vice-versa.
+Nos primeiros sistemas operacionais, o gerenciamento de memória era extremamente simples: um processo era carregado por vez e permanecia na memória até o término. Não havia mecanismos de troca, paginação ou memória virtual. Esses modelos ainda são comuns em sistemas embarcados ou aplicações de tempo real, onde a previsibilidade é mais importante que a eficiência de uso da memória.
 
-Para controlar quais áreas da memória estão livres ou ocupadas, usam-se mapas de bits ou listas de lacunas (holes).
+🔸 2. Multiprogramação e Swapping (Troca)
+Com o advento da multiprogramação, tornou-se necessário lidar com vários processos ao mesmo tempo. Isso introduziu a ideia de swapping, onde processos inativos são removidos temporariamente da memória e armazenados no disco. Quando voltam a ser ativos, são trazidos de volta para a memória.
 
-A compactação da memória também pode ser usada para eliminar lacunas e consolidar espaço contíguo.
+A memória e o disco precisam de gerenciamento:
 
-- Alocação de Memória
-Existem várias estratégias para alocar memória:
+Mapas de bits: um vetor indica se cada bloco de memória está livre ou ocupado.
 
-Primeiro encaixe: escolhe a primeira lacuna grande o suficiente.
+Listas de lacunas: registram blocos contíguos de memória livre.
 
-Melhor encaixe: escolhe a menor lacuna possível que ainda acomoda o processo.
+A compactação da memória é usada para eliminar lacunas e realocar os segmentos para que fiquem contíguos, mas é um processo custoso, especialmente em sistemas grandes.
 
-Pior encaixe: escolhe a maior lacuna disponível.
+Exemplo: para compactar 4 GB de memória com um acesso de 4 ns por palavra, leva-se vários segundos, o que é inaceitável em muitos contextos.
 
-Próximo encaixe: começa a busca da última posição alocada.
+🔸 3. Técnicas de Alocação de Memória
+Quando novos processos precisam ser alocados na memória, o SO pode utilizar diferentes estratégias de alocação de lacunas:
 
-Esses algoritmos são testados usando exemplos de tamanhos variados de lacunas e segmentos solicitados.
+Primeiro Encaixe (First Fit): seleciona a primeira lacuna suficientemente grande.
 
-- Endereços Físicos e Virtuais
-Endereço físico: local real na RAM.
+Melhor Encaixe (Best Fit): escolhe a menor lacuna que seja suficiente.
 
-Endereço virtual: endereço visto pelo processo, que é traduzido por mecanismos como a TLB (Translation Lookaside Buffer) e a tabela de páginas.
+Pior Encaixe (Worst Fit): seleciona a maior lacuna possível, esperando sobrar espaço utilizável.
 
-A tradução de endereços é essencial para a abstração de memória.
+Próximo Encaixe (Next Fit): variação do primeiro encaixe, continua a busca a partir do último local alocado.
 
-- Paginação
-A memória virtual paginada permite que o espaço de endereçamento seja dividido em páginas (do lado lógico) e quadros de página (do lado físico). Isso possibilita que páginas não contíguas sejam carregadas conforme necessário (demanda).
+Essas estratégias afetam diretamente o nível de fragmentação da memória e o desempenho do sistema.
 
-O tamanho das páginas (ex: 4 KB ou 8 KB) afeta a eficiência da TLB, uso de memória e número de faltas de página.
+🔸 4. Espaço de Endereçamento: Endereço Virtual x Físico
+Endereço Físico: posição real na memória RAM.
 
-Um sistema precisa de uma TLB eficiente para reduzir acessos à tabela de páginas, que são mais lentos.
+Endereço Virtual: posição lógica usada pelo processo.
 
-Algoritmos de substituição de página:
+Os endereços virtuais são convertidos para físicos por meio da MMU (Unidade de Gerenciamento de Memória).
 
-FIFO
+Isso permite que diferentes processos usem os mesmos endereços virtuais sem conflito, graças à tradução isolada.
 
-LRU (Least Recently Used)
+Essa separação permite a abstração da memória contínua, mesmo que fisicamente ela esteja fragmentada.
 
-WSClock e envelhecimento são algoritmos avançados que equilibram desempenho e complexidade.
+🔸 5. Paginação e Memória Virtual
+A paginação por demanda é uma das técnicas mais usadas em SOs modernos:
 
-- Segmentação
-A segmentação divide a memória lógica em segmentos como código, dados e pilha, com tamanhos variáveis. Isso:
+O espaço de endereçamento é dividido em páginas de tamanho fixo (ex: 4 KB, 8 KB, 16 KB).
 
-Simplifica a proteção e compartilhamento de memória.
+A memória física é dividida em quadros de página do mesmo tamanho.
 
-Facilita a manipulação de estruturas de dados dinâmicas. Contudo, muitos sistemas modernos (como o x86-64) abandonaram o uso ativo de segmentação.
+Apenas as páginas necessárias são carregadas na RAM, reduzindo o uso de memória física.
 
-- Paginação com Segmentação
-Sistemas como o MULTICS e o antigo x86 (32 bits) combinaram paginação com segmentação, criando um esquema de memória virtual bidimensional.
+Tabela de Páginas:
+Cada processo tem sua tabela de páginas, que mapeia páginas virtuais para quadros físicos.
 
-Atualmente, a segmentação está em desuso, e o x86-64 suporta apenas paginação com segmentos fixos.
+Em sistemas grandes, usa-se tabela de páginas em múltiplos níveis para evitar tabelas muito grandes em memória.
 
-- Tabelas de Páginas e Estrutura de Dados
-Tabelas de páginas podem ser grandes. Por isso, usam-se tabelas de páginas multinível, onde a tabela é dividida em níveis hierárquicos.
+Exemplo:
 
-Exemplo: um endereço virtual de 32 bits pode ser dividido em partes que indicam o índice em cada nível da tabela e o deslocamento.
+Um sistema com endereços de 32 bits e páginas de 4 KB terá 2²⁰ páginas por processo (pois 2³² / 2¹² = 2²⁰).
 
-- Desempenho e Eficiência
-O carregamento da tabela de páginas pode ocupar tempo da CPU.
+Se cada entrada da tabela tiver 4 bytes, a tabela ocupa 4 MB.
 
-O tempo de execução real de um processo pode ser impactado por faltas de página, especialmente se forem frequentes.
+🔸 6. TLB – Translation Lookaside Buffer
+A TLB é uma memória cache especial usada para acelerar a tradução de endereços virtuais para físicos.
 
-A técnica copy-on-write é usada para otimizar a cópia de processos, permitindo que páginas sejam compartilhadas até que uma modificação ocorra.
+Quando um endereço virtual é acessado, verifica-se primeiro a TLB:
 
-- Considerações de Hardware
-Para que a memória virtual funcione, são necessários:
+Hit: a tradução está na TLB, e o acesso é rápido.
 
-MMU (Unidade de Gerenciamento de Memória)
+Miss: a tabela de páginas deve ser acessada, o que é mais lento.
 
-TLB
+A eficiência da TLB depende de:
 
-Suporte à tabela de páginas no hardware Sistemas antigos, como o 8086, implementavam paginação mesmo sem MMU real, usando hardware externo ou segmentação criativa.
+Número de entradas (ex: 32, 64, 1024).
+
+Localidade de referência dos programas.
+
+🔸 7. Faltas de Página (Page Faults)
+Uma falta de página ocorre quando o processo tenta acessar uma página que não está carregada na memória:
+
+O sistema pausa a execução, busca a página no disco e a carrega.
+
+Isso é extremamente custoso (pode levar milissegundos).
+
+A frequência de faltas de página deve ser minimizada.
+
+Fórmula do tempo de instrução efetivo:
+*Tefetivo = (1 - p) * Tacesso + p * Tfalta*
+onde p é a taxa de faltas de página.
+
+🔸 8. Algoritmos de Substituição de Página
+Quando não há mais quadros disponíveis, uma página existente deve ser substituída. Os algoritmos incluem:
+
+FIFO: remove a página mais antiga.
+
+LRU (Least Recently Used): remove a menos recentemente usada.
+
+Envelhecimento: aproxima o LRU usando bits de acesso.
+
+WSClock: balanceia uso recente e tempo de residência, ideal para sistemas modernos.
+
+🔸 9. Segmentação
+A segmentação divide o espaço de endereçamento em segmentos de tamanho variável (código, dados, pilha).
+
+Permite melhor proteção e compartilhamento.
+
+Facilita manipulação de estruturas dinâmicas.
+
+Apesar de suas vantagens, a segmentação está caindo em desuso:
+
+Os sistemas modernos preferem paginação pura.
+
+O x86-64, por exemplo, praticamente abandonou o uso real da segmentação.
+
+🔸 10. Combinação de Paginação e Segmentação
+Alguns sistemas, como o MULTICS e o Intel x86 de 32 bits, combinaram paginação e segmentação:
+
+Cada segmento tem sua própria tabela de páginas.
+
+Isso permite que o espaço de endereçamento seja mais flexível e seguro, mas aumenta a complexidade.
+
+🔸 11. Copy-on-Write (COW)
+É uma técnica que evita cópia desnecessária de páginas:
+
+Dois processos podem compartilhar páginas somente leitura.
+
+Se um deles tentar escrever, uma cópia privada é feita (a escrita ocorre na cópia).
+
+É muito usada em fork() e virtualização.
+
+Embora ideal para servidores e desktops, pode não fazer sentido em smartphones, onde o número de processos paralelos e o espaço de armazenamento são limitados.
