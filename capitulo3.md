@@ -33,7 +33,6 @@ Essas estratégias afetam diretamente o nível de fragmentação da memória e o
 *Espaço de Endereçamento: Endereço Virtual x Físico*
 
 -Endereço Físico: posição real na memória RAM.
-
 -Endereço Virtual: posição lógica usada pelo processo.
 
 Os endereços virtuais são convertidos para físicos por meio da MMU (Unidade de Gerenciamento de Memória).
