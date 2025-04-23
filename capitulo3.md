@@ -1,12 +1,12 @@
 Capítulo 3 – Gerenciamento de Memória 
 
-*Visão Geral do Gerenciamento de Memória*
+**Visão Geral do Gerenciamento de Memória**
 
 A principal função do gerenciamento de memória é permitir que vários processos coexistam, maximizando o uso da RAM e oferecendo proteção, isolamento e flexibilidade. Os sistemas operacionais modernos precisam lidar com a limitação da memória física e o crescente número de processos e programas exigentes.
 
 Nos primeiros sistemas operacionais, o gerenciamento de memória era extremamente simples: um processo era carregado por vez e permanecia na memória até o término. Não havia mecanismos de troca, paginação ou memória virtual. Esses modelos ainda são comuns em sistemas embarcados ou aplicações de tempo real, onde a previsibilidade é mais importante que a eficiência de uso da memória.
 
-*Multiprogramação e Swapping (Troca)*
+**Multiprogramação e Swapping (Troca)**
 
 Com o advento da multiprogramação, tornou-se necessário lidar com vários processos ao mesmo tempo. Isso introduziu a ideia de swapping, onde processos inativos são removidos temporariamente da memória e armazenados no disco. Quando voltam a ser ativos, são trazidos de volta para a memória.
 
@@ -19,7 +19,7 @@ A compactação da memória é usada para eliminar lacunas e realocar os segment
 
 Exemplo: para compactar 4 GB de memória com um acesso de 4 ns por palavra, leva-se vários segundos, o que é inaceitável em muitos contextos.
 
-*Técnicas de Alocação de Memória*
+**Técnicas de Alocação de Memória**
 
 Quando novos processos precisam ser alocados na memória, o SO pode utilizar diferentes estratégias de alocação de lacunas:
 
@@ -30,7 +30,7 @@ Quando novos processos precisam ser alocados na memória, o SO pode utilizar dif
 
 Essas estratégias afetam diretamente o nível de fragmentação da memória e o desempenho do sistema.
 
-*Espaço de Endereçamento: Endereço Virtual x Físico*
+**Espaço de Endereçamento: Endereço Virtual x Físico**
 
 -Endereço Físico: posição real na memória RAM.
 -Endereço Virtual: posição lógica usada pelo processo.
@@ -40,7 +40,7 @@ Isso permite que diferentes processos usem os mesmos endereços virtuais sem con
 
 Essa separação permite a abstração da memória contínua, mesmo que fisicamente ela esteja fragmentada.
 
-*Paginação e Memória Virtual*
+**Paginação e Memória Virtual**
 
 A paginação por demanda é uma das técnicas mais usadas em SOs modernos:
 
@@ -57,7 +57,7 @@ Um sistema com endereços de 32 bits e páginas de 4 KB terá 2²⁰ páginas po
 
 Se cada entrada da tabela tiver 4 bytes, a tabela ocupa 4 MB.
 
-*TLB – Translation Lookaside Buffer*
+**TLB – Translation Lookaside Buffer**
 
 A TLB é uma memória cache especial usada para acelerar a tradução de endereços virtuais para físicos.
 
@@ -69,7 +69,7 @@ A eficiência da TLB depende de:
 -Número de entradas (ex: 32, 64, 1024).
 -Localidade de referência dos programas.
 
-*Faltas de Página (Page Faults)*
+**Faltas de Página (Page Faults)**
 
 Uma falta de página ocorre quando o processo tenta acessar uma página que não está carregada na memória:
 
@@ -83,7 +83,7 @@ Fórmula do tempo de instrução efetivo:
 *Tefetivo = (1 - p) * Tacesso + p * Tfalta*
 onde p é a taxa de faltas de página.
 
-*Algoritmos de Substituição de Página*
+**Algoritmos de Substituição de Página**
 
 Quando não há mais quadros disponíveis, uma página existente deve ser substituída. Os algoritmos incluem:
 
@@ -92,7 +92,7 @@ Quando não há mais quadros disponíveis, uma página existente deve ser substi
 -Envelhecimento: aproxima o LRU usando bits de acesso.
 -WSClock: balanceia uso recente e tempo de residência, ideal para sistemas modernos.
 
-*Segmentação*
+**Segmentação**
 
 A segmentação divide o espaço de endereçamento em segmentos de tamanho variável (código, dados, pilha).
 
@@ -101,10 +101,10 @@ Permite melhor proteção e compartilhamento.
 Facilita manipulação de estruturas dinâmicas.
 -Apesar de suas vantagens, a segmentação está caindo em desuso:
 
-Os sistemas modernos preferem paginação pura.
+Os sistemas modernos preferem paginação pura.  
 -O x86-64, por exemplo, praticamente abandonou o uso real da segmentação.
 
-*Combinação de Paginação e Segmentação*
+**Combinação de Paginação e Segmentação**  
 
 Alguns sistemas, como o MULTICS e o Intel x86 de 32 bits, combinaram paginação e segmentação:
 
@@ -112,7 +112,7 @@ Cada segmento tem sua própria tabela de páginas.
 
 Isso permite que o espaço de endereçamento seja mais flexível e seguro, mas aumenta a complexidade.
 
-*Copy-on-Write (COW)*
+**Copy-on-Write (COW)**
 
 É uma técnica que evita cópia desnecessária de páginas:
 
