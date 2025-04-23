@@ -12,8 +12,8 @@ Com o advento da multiprogramação, tornou-se necessário lidar com vários pro
 
 A memória e o disco precisam de gerenciamento:
 
--Mapas de bits: um vetor indica se cada bloco de memória está livre ou ocupado.
--Listas de lacunas: registram blocos contíguos de memória livre.
+- Mapas de bits: um vetor indica se cada bloco de memória está livre ou ocupado.
+- Listas de lacunas: registram blocos contíguos de memória livre.
 
 A compactação da memória é usada para eliminar lacunas e realocar os segmentos para que fiquem contíguos, mas é um processo custoso, especialmente em sistemas grandes.
 
@@ -23,17 +23,17 @@ Exemplo: para compactar 4 GB de memória com um acesso de 4 ns por palavra, leva
 
 Quando novos processos precisam ser alocados na memória, o SO pode utilizar diferentes estratégias de alocação de lacunas:
 
--Primeiro Encaixe (First Fit): seleciona a primeira lacuna suficientemente grande.
--Melhor Encaixe (Best Fit): escolhe a menor lacuna que seja suficiente.
--Pior Encaixe (Worst Fit): seleciona a maior lacuna possível, esperando sobrar espaço utilizável.
--Próximo Encaixe (Next Fit): variação do primeiro encaixe, continua a busca a partir do último local alocado.
+- Primeiro Encaixe (First Fit): seleciona a primeira lacuna suficientemente grande.
+- Melhor Encaixe (Best Fit): escolhe a menor lacuna que seja suficiente.
+- Pior Encaixe (Worst Fit): seleciona a maior lacuna possível, esperando sobrar espaço utilizável.
+- Próximo Encaixe (Next Fit): variação do primeiro encaixe, continua a busca a partir do último local alocado.
 
 Essas estratégias afetam diretamente o nível de fragmentação da memória e o desempenho do sistema.
 
 **Espaço de Endereçamento: Endereço Virtual x Físico**
 
--Endereço Físico: posição real na memória RAM.
--Endereço Virtual: posição lógica usada pelo processo.
+- Endereço Físico: posição real na memória RAM.
+- Endereço Virtual: posição lógica usada pelo processo.
 
 Os endereços virtuais são convertidos para físicos por meio da MMU (Unidade de Gerenciamento de Memória).
 Isso permite que diferentes processos usem os mesmos endereços virtuais sem conflito, graças à tradução isolada.
@@ -62,12 +62,12 @@ Se cada entrada da tabela tiver 4 bytes, a tabela ocupa 4 MB.
 A TLB é uma memória cache especial usada para acelerar a tradução de endereços virtuais para físicos.
 
 Quando um endereço virtual é acessado, verifica-se primeiro a TLB:
--Hit: a tradução está na TLB, e o acesso é rápido.
--Miss: a tabela de páginas deve ser acessada, o que é mais lento.
+- Hit: a tradução está na TLB, e o acesso é rápido.
+- Miss: a tabela de páginas deve ser acessada, o que é mais lento.
 
 A eficiência da TLB depende de:
--Número de entradas (ex: 32, 64, 1024).
--Localidade de referência dos programas.
+- Número de entradas (ex: 32, 64, 1024).
+- Localidade de referência dos programas.
 
 **Faltas de Página (Page Faults)**
 
@@ -86,11 +86,10 @@ onde p é a taxa de faltas de página.
 **Algoritmos de Substituição de Página**
 
 Quando não há mais quadros disponíveis, uma página existente deve ser substituída. Os algoritmos incluem:
-
--FIFO: remove a página mais antiga.
--LRU (Least Recently Used): remove a menos recentemente usada.
--Envelhecimento: aproxima o LRU usando bits de acesso.
--WSClock: balanceia uso recente e tempo de residência, ideal para sistemas modernos.
+- FIFO: remove a página mais antiga.
+- LRU (Least Recently Used): remove a menos recentemente usada.
+- Envelhecimento: aproxima o LRU usando bits de acesso.
+- WSClock: balanceia uso recente e tempo de residência, ideal para sistemas modernos.
 
 **Segmentação**
 
@@ -99,10 +98,10 @@ A segmentação divide o espaço de endereçamento em segmentos de tamanho vari�
 Permite melhor proteção e compartilhamento.
 
 Facilita manipulação de estruturas dinâmicas.
--Apesar de suas vantagens, a segmentação está caindo em desuso:
+- Apesar de suas vantagens, a segmentação está caindo em desuso:
 
 Os sistemas modernos preferem paginação pura.  
--O x86-64, por exemplo, praticamente abandonou o uso real da segmentação.
+- O x86-64, por exemplo, praticamente abandonou o uso real da segmentação.
 
 **Combinação de Paginação e Segmentação**  
 
