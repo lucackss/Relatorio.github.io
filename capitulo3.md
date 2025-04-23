@@ -1,4 +1,4 @@
-Capítulo 3 – Gerenciamento de Memória 
+**Capítulo 3 – Gerenciamento de Memória** 
 
 **Visão Geral do Gerenciamento de Memória**
 
